@@ -15,7 +15,7 @@ class LoginView(View):
 
     def post(self, request):
         
-        username = request.POST['username']
+        username = request.POST['username'].lower()
         pwd = request.POST['p1']
         
         user = authenticate(request, username=username, password=pwd)
@@ -42,7 +42,7 @@ class SignupView(View):
 
     def post(self, request, code):
         code = request.POST['code']
-        username = request.POST['username']
+        username = request.POST['username'].lower()
         pwd = request.POST['p1']
         pwd_conf = request.POST['p2']
 
