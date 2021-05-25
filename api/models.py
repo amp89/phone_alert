@@ -68,7 +68,7 @@ class Alert(models.Model):
         super(__class__,self).save(*args, **kwargs)
 
     def __str__(self):
-        dt = datetime.datetime.fromtimestamp(self.expiration_timestamp)
+        dt = datetime.datetime.fromtimestamp(self.timestamp)
         return f"{self.user.username} | {dt.month}//{dt.day}/{dt.year} {dt.hour}:{dt.minute}"
         
 
