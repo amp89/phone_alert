@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    {% for code in codes %}
+        <ul>
+            <li>{{ code.get_link }} | {{code.get_exp_str}}</li>
+        </ul>
+    {% endfor %}
+{% endblock %}

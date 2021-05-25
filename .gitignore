@@ -1,0 +1,6 @@
+*.pyc
+*.vscode
+.env
+*.sqlite3
+venv/
+venv/*

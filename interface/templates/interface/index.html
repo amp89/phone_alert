@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div id='alertApp'>
+    <h5 class="card-title text-center">Send Signal</h5>
+    <br>
+    [[result]]
+    <br>
+
+    <button v-on:click="postNote()" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Send "HANG UP YOUR PHONE" Message</button>
+
+    
+
+</div>
+
+<script>
+const pushUrl = "{% url 'api:push_button' %}"
+
+
+const app = new Vue({
+    delimiters: ["[[", "]]"],
+    el: "#alertApp",
+    data: {
+        
+        
+        result: "",
+        secondsLeft: null
+        
+    },
+    methods: {
+        reset: function(){
+            
+            this.result = ''
+        },
+        
+        postNote: function(){
+        
+            axios.post(pushUrl).then(
+                r => {
+                    this.result = r.data.message
+                    
+                    this.secondsLeft = null
+                }
+            ).catch(
+                e => {
+                    
+                        this.result = "FAILED TO SEND MESSAGE"
+                        alert("Failed to send message")
+                     
+                    }
+            )
+            
+            
+        },
+        
+        
+    },
+
+   
+    
+})
+
+</script>
+{% endblock %}
