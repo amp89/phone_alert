@@ -38,7 +38,7 @@ class PushButton(APIAuthView):
                 }, status=200)
 
         try:
-            call_command('push_button', user_id=request.user.id, button_id=1) # TODO....
+            call_command('push_button', user_id=request.user.id, button_id=1) # There is just one button for now, so I'll keep it simple
             return Response({'message':"Message sent! Please wait a minute for it to execute."}, status=200)
         except ButtonNotPressedException as e:
             return Response({
@@ -46,6 +46,3 @@ class PushButton(APIAuthView):
             }, status=200)
 
 
-class PasswordView(APIAuthView):
-    def post(self, request, *args, **kwargs):
-        raise NotImplementedError

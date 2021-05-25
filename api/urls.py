@@ -6,7 +6,7 @@ app_name = 'api'
 
 urlpatterns = [
         path('push/', views.PushButton.as_view(), name="push_button"),
-        path('pwd/', views.PasswordView.as_view(), name="password"),
+        
 
         
     ]
