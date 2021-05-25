@@ -26,7 +26,7 @@ load_dotenv(BASE_DIR/'.env')
 ################# CUSTOM SETTINGS ##################
 TIME_BETWEEN_REQUEST_SECONDS = int(os.environ['TIME_BETWEEN_REQUEST_SECONDS']) # 30
 SITE_URL = os.environ['SITE_URL'] # 'http://localhost:8000'
-LOGIN_REDIRECT_URL=''
+LOGIN_REDIRECT_URL='/'
 LOGOUT_REDIRECT_URL='/login'
 ################ /CUSTOM SETTINGS ##################
 
