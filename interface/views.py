@@ -97,7 +97,7 @@ class PasswordView(LoginRequiredMixin, View):
         request.user.save()
         
         logout(request)
-        new_user = authenticate(request, username=request.user.username, password=pwd)
+        new_user = authenticate(request, username=request.user.username.lower(), password=pwd)
         if new_user is not None:
             login(request, new_user)
             return redirect("interface:login")

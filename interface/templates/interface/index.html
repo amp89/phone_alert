@@ -9,7 +9,12 @@
     [[result]]
     <br>
 
-    <button v-on:click="postNote()" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Send "HANG UP YOUR PHONE" Message</button>
+    <button v-if='!primed' v-on:click="preparePost()" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Send "HANG UP YOUR PHONE" Message</button>
+    
+    <button v-if='primed' v-on:click="postNote()" class="btn btn-lg btn-success btn-block text-uppercase" type="submit">Confirm: You want to make the Alexa say "HANG UP YOUR PHONE"</button>
+    
+    <button v-if='primed' v-on:click="cancelPost()" class="btn btn-lg btn-danger btn-block text-uppercase" type="submit">Cancel</button>
+    
 
     
 
@@ -23,9 +28,8 @@ const app = new Vue({
     delimiters: ["[[", "]]"],
     el: "#alertApp",
     data: {
-        
-        
         result: "",
+        primed: false,
         secondsLeft: null
         
     },
@@ -35,8 +39,15 @@ const app = new Vue({
             this.result = ''
         },
         
-        postNote: function(){
+        preparePost: function(){
+            this.primed = true
+        },
+        cancelPost: function(){
+            this.primed = false
+        },
         
+        postNote: function(){
+            this.cancelPost()
             axios.post(pushUrl).then(
                 r => {
                     this.result = r.data.message
