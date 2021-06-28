@@ -41,10 +41,21 @@ class SignupView(View):
 
 
     def post(self, request, code):
+        
         code = request.POST['code']
         username = request.POST['username'].lower()
         pwd = request.POST['p1']
         pwd_conf = request.POST['p2']
+        
+        
+        try:
+            code_obj = ActivationCode.objects.get(code=code)
+        except:
+            return HttpResponseBadRequest("INVALID CODE")
+
+        if code_obj and code_obj.check_validity() == False:
+            return HttpResponseBadRequest("INVALID CODE")
+        
 
         try:
             validators.validate_password(password=pwd, user=User)
